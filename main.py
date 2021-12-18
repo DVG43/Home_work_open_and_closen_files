@@ -25,14 +25,25 @@ import os
 # my_file.write("Все ОК")
 # my_file.close()
 
-my_file = open ("coock_book.txt",'rt')
-print(my_file.read())
-my_file.close()
+#
 
-# with open('start_file.txt', encoding = "utf-8") as file:
-#       # encoding = "utf-8"
-#       print(file.read())
+def get_data(file_neme):
+      dishes_list = []
+      #ingradients_list_totall = []
+      with open(file_neme,encoding='UTF-8') as file:
+            for line in file:
+                  dishes_list.append(line)
+                  dish_qantity = int(file.readline().strip())
+                  ingredient_list = []
+                  for ingradients in range(dish_qantity):
+                        file.readline()
+                  file.readline()
+      return dishes_list
+      #return
+
+path = os.getcwd()
+name_file = 'stating_file.txt'
+full_path = os.path.join(path, name_file)
 
 
-
-
+print(get_data(full_path))
