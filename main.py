@@ -27,23 +27,41 @@ import os
 
 #
 
-def get_data(file_neme):
+def get_data_dishes(file_neme):
       dishes_list = []
-      #ingradients_list_totall = []
       with open(file_neme,encoding='UTF-8') as file:
             for line in file:
-                  dishes_list.append(line)
+                  dishes_list.append(line.strip())
                   dish_qantity = int(file.readline().strip())
-                  ingredient_list = []
                   for ingradients in range(dish_qantity):
                         file.readline()
                   file.readline()
       return dishes_list
-      #return
 
-path = os.getcwd()
-name_file = 'stating_file.txt'
-full_path = os.path.join(path, name_file)
+def get_data_ingrediens(file_neme):
+      ingredies_list = []
+      with open(file_neme,encoding='UTF-8') as file:
+            for line in file:
+                  list_ingr = []
+                  ingredies_list.append(list_ingr)
+                  dish_qantity = int(file.readline().strip())
+                  for ingradients in range(dish_qantity):
+                        ingradients = file.readline().strip()
+                        list_ingr.append(ingradients)
+                  file.readline()
+      return ingredies_list
+
+def make_dict_from_str(str_name):
+      new_str = str_name.split("|")
+      new_dickt = {'ingredient_name': new_str[0], 'quantity': new_str[1], 'measure': new_str[2]}
+      return new_dickt
+
+print(get_data_dishes("starting_file.txt"))
+print()
+list_of_list = get_data_ingrediens("starting_file.txt")
+new_list_of_list = []
+for elements_list_of_list in list_of_list:
+      for parts_elements_list_of_list in elements_list_of_list:
 
 
-print(get_data(full_path))
+print(list_of_list)
