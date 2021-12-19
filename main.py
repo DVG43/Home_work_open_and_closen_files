@@ -56,12 +56,28 @@ def make_dict_from_str(str_name):
       new_dickt = {'ingredient_name': new_str[0], 'quantity': new_str[1], 'measure': new_str[2]}
       return new_dickt
 
+def make_list_of_dict(list_list):
+      new_list_of_dict = []
+      for element_list in list_list:
+            new_element_list = []
+            for element_str in element_list:
+                 new_element_list.append(make_dict_from_str(element_str))
+                 new_element_list.append('\n')
+            new_list_of_dict.append(new_element_list)
+            new_list_of_dict.append('\n')
+      return new_list_of_dict
+
 print(get_data_dishes("starting_file.txt"))
 print()
 list_of_list = get_data_ingrediens("starting_file.txt")
-new_list_of_list = []
-for elements_list_of_list in list_of_list:
-      for parts_elements_list_of_list in elements_list_of_list:
-
-
 print(list_of_list)
+print(make_list_of_dict(list_of_list))
+
+cook_book = {}
+dishes_name_lis = get_data_dishes("starting_file.txt")
+
+for key_dishes_name_lis in dishes_name_lis:
+      cook_book[''] = key_dishes_name_lis
+
+for velue_dishes_name_lis in make_list_of_dict(list_of_list):
+      
