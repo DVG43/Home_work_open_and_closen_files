@@ -25,8 +25,7 @@ import os
 # my_file.write("Все ОК")
 # my_file.close()
 
-#
-
+# достаем из файла названия блюд и формируем список
 def get_data_dishes(file_neme):
       dishes_list = []
       with open(file_neme,encoding='UTF-8') as file:
@@ -38,6 +37,7 @@ def get_data_dishes(file_neme):
                   file.readline()
       return dishes_list
 
+# достаем из файла инградиенты
 def get_data_ingrediens(file_neme):
       ingredies_list = []
       with open(file_neme,encoding='UTF-8') as file:
@@ -62,22 +62,27 @@ def make_list_of_dict(list_list):
             new_element_list = []
             for element_str in element_list:
                  new_element_list.append(make_dict_from_str(element_str))
-                 new_element_list.append('\n')
+                 #new_element_list.append('\n')
             new_list_of_dict.append(new_element_list)
-            new_list_of_dict.append('\n')
+            #new_list_of_dict.append('\n')
       return new_list_of_dict
 
-print(get_data_dishes("starting_file.txt"))
-print()
+#print(get_data_dishes("starting_file.txt"))
+#print()
 list_of_list = get_data_ingrediens("starting_file.txt")
-print(list_of_list)
-print(make_list_of_dict(list_of_list))
+#print(list_of_list)
+new_list_of_list = make_list_of_dict(list_of_list)
+#print(new_list_of_list)
 
-cook_book = {}
+#cook_book = {}
 dishes_name_lis = get_data_dishes("starting_file.txt")
+# Генератор словаря из двух списков
+cook_book = {(key_dishes_name_lis): (value_list_of_list) for key_dishes_name_lis in dishes_name_lis
+             for value_list_of_list in new_list_of_list }
 
-for key_dishes_name_lis in dishes_name_lis:
-      cook_book[''] = key_dishes_name_lis
+# for key_dishes_name_lis in dishes_name_lis:
+#       cook_book[''] = key_dishes_name_lis
 
-for velue_dishes_name_lis in make_list_of_dict(list_of_list):
-      
+print(cook_book)
+
+
