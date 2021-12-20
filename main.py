@@ -74,15 +74,91 @@ list_of_list = get_data_ingrediens("starting_file.txt")
 new_list_of_list = make_list_of_dict(list_of_list)
 #print(new_list_of_list)
 
-#cook_book = {}
+
 dishes_name_lis = get_data_dishes("starting_file.txt")
 # Генератор словаря из двух списков
 cook_book = {(key_dishes_name_lis): (value_list_of_list) for key_dishes_name_lis in dishes_name_lis
              for value_list_of_list in new_list_of_list }
 
-# for key_dishes_name_lis in dishes_name_lis:
-#       cook_book[''] = key_dishes_name_lis
 
 print(cook_book)
+
+#  get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2)
+# {
+#   'Картофель': {'measure': 'кг', 'quantity': 2},
+#   'Молоко': {'measure': 'мл', 'quantity': 200},
+#   'Помидор': {'measure': 'шт', 'quantity': 4},
+#   'Сыр гауда': {'measure': 'г', 'quantity': 200},
+#   'Яйцо': {'measure': 'шт', 'quantity': 4},
+#   'Чеснок': {'measure': 'зубч', 'quantity': 6}
+# }
+whishes_list = []
+persons = 0
+def get_shop_list_by_dishes (whishes_list, persons):
+# Проверка правильости блюда по переменной dishes_name_lis - цикл по списку ввода.
+      total_list_whishes = []
+      total_list_ingredient = []
+      for dish_name in whishes_list:
+            if dish_name in dishes_name_lis:
+                  # добавляем в АА переменную А
+                  # добавляем в BB переменную B
+                   total_list_whishes.append(dish_name)
+                   total_list_ingredient.append(make_value_new_dict(dish_name,cook_book))
+            else:
+                  print (f'Блюда {dish_name} нет в кухонной книге')
+      # Генерируем словарь из двух списков.
+      new_dict_of_dish_for_persons = {(key_new_dict): (value_new_dict) for key_new_dict in total_list_whishes
+                                      for value_new_dict in total_list_ingredient }
+      return  new_dict_of_dish_for_persons
+
+def make_value_new_dict(name_in_dict, some_dict):
+      list_of_ingradient = some_dict['name_in_dict']
+      new_list_of_ingradient = []
+      for name_of_ingradient in  list_of_ingradient:
+            aaa = name_of_ingradient ['measure']
+            bbb = name_of_ingradient ['quantity']*persons
+            ingradient_dict = {'measure': aaa , 'quantity': bbb  }
+            new_list_of_ingradient.append(ingradient_dict)
+
+
+# Определяем B [].
+# цикл по списку значения подфункция с формированием  словаря для значений
+ #     удаляем первый ключ
+#      меняем местами второй и третий ключ
+#      умножаем значение третьего ключа на глобальную переменную - количество персон.
+#      Добавляем словарь в переменную В
+# возвращает переменую B
+
+# Печатаем словарь
+print ( get_shop_list_by_dishes (whishes_list, persons))
+
+
+
+
+
+
+
+# Подфункция как параметр вводится список со словарями.
+# Определяем А [].
+
+# Выбираем значения по ключу.
+# цикл по списку значения подфункция с формированием переменной для ключа и словаря для значения
+#      вытаскиваем значение первого ключа в переменную А
+#      добавляем пеерменную А в список ингрединетов
+# # возвращает переменую А
+
+# Определяем B [].
+# цикл по списку значения подфункция с формированием  словаря для значений
+ #     удаляем первый ключ
+#      меняем местами второй и третий ключ
+#      умножаем значение третьего ключа на глобальную переменную - количество персон.
+#      Добавляем словарь в переменную В
+# возвращает переменую B
+
+
+
+
+
+
 
 
