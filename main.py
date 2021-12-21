@@ -94,24 +94,31 @@ print(cook_book)
 # }
 whishes_list = []
 persons = 0
-def get_shop_list_by_dishes (whishes_list, persons):
+def get_shop_list_by_dishes (whishes_list, book):
 # Проверка правильости блюда по переменной dishes_name_lis - цикл по списку ввода.
-      total_list_whishes = []
+      total_list_ingredients = []
       total_list_ingredient = []
       for dish_name in whishes_list:
             if dish_name in dishes_name_lis:
                   # добавляем в АА переменную А
                   # добавляем в BB переменную B
-                   total_list_whishes.append(dish_name)
-                   total_list_ingredient.append(make_value_new_dict(dish_name,cook_book))
+                  new_list_1 = make_value_new_dict(dish_name, book)
+                  total_list_ingredients.append(new_list_1)
+                  new_list_2 = make_value_new_dict(dish_name,book)
+                  total_list_ingredient.append(new_list_2)
             else:
                   print (f'Блюда {dish_name} нет в кухонной книге')
       # Генерируем словарь из двух списков.
-      new_dict_of_dish_for_persons = {(key_new_dict): (value_new_dict) for key_new_dict in total_list_whishes
+      new_dict_of_dish_for_persons = {(key_new_dict): (value_new_dict) for key_new_dict in total_list_ingredients
                                       for value_new_dict in total_list_ingredient }
       return  new_dict_of_dish_for_persons
 
-def make_value_new_dict(name_in_dict, some_dict):
+# Выбираем значения по ключу.
+# цикл по списку значения подфункция с формированием переменной для ключа и словаря для значения
+#      вытаскиваем значение первого ключа в переменную А
+#      добавляем пеерменную А в список ингрединетов
+# # возвращает переменую А
+def make_key_new_dict(name_in_dict, some_dict):
       list_of_ingradient = some_dict['name_in_dict']
       new_list_of_ingradient = []
       for name_of_ingradient in  list_of_ingradient:
@@ -119,7 +126,7 @@ def make_value_new_dict(name_in_dict, some_dict):
             bbb = name_of_ingradient ['quantity']*persons
             ingradient_dict = {'measure': aaa , 'quantity': bbb  }
             new_list_of_ingradient.append(ingradient_dict)
-
+      return new_list_of_ingradient
 
 # Определяем B [].
 # цикл по списку значения подфункция с формированием  словаря для значений
@@ -129,11 +136,26 @@ def make_value_new_dict(name_in_dict, some_dict):
 #      Добавляем словарь в переменную В
 # возвращает переменую B
 
+def make_value_new_dict(name_in_dict, some_dict):
+      print (name_in_dict)
+      print(some_dict.keys())
+      # list_of_ingradient - значение по указаному ключу
+      list_of_ingradient = some_dict['name_in_dict']
+      new_list_of_neme_ingradient = []
+      for name_of_ingradient in  list_of_ingradient:
+            aaa = name_of_ingradient ['ingredient_name']
+            new_list_of_neme_ingradient.append(aaa)
+      return new_list_of_neme_ingradient
+
+
+
 # Печатаем словарь
-print ( get_shop_list_by_dishes (whishes_list, persons))
+whishes_list = ['Омлет', 'Утка по-пекински']
+persons = 3
+print ( get_shop_list_by_dishes (whishes_list, cook_book))
 
 
-
+#'Омлет', 'Утка по-пекински'
 
 
 
@@ -141,11 +163,7 @@ print ( get_shop_list_by_dishes (whishes_list, persons))
 # Подфункция как параметр вводится список со словарями.
 # Определяем А [].
 
-# Выбираем значения по ключу.
-# цикл по списку значения подфункция с формированием переменной для ключа и словаря для значения
-#      вытаскиваем значение первого ключа в переменную А
-#      добавляем пеерменную А в список ингрединетов
-# # возвращает переменую А
+
 
 # Определяем B [].
 # цикл по списку значения подфункция с формированием  словаря для значений
