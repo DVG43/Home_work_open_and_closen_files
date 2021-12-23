@@ -49,7 +49,7 @@ def get_data_ingrediens(file_neme):
                         ingradients = file.readline().strip()
                         list_ingr.append(ingradients)
                   file.readline()
-      print(ingredients_list)
+      #print(ingredients_list)
       return ingredients_list
 
 def make_dict_from_str(str_name):
@@ -108,14 +108,17 @@ def make_key_new_dict(name_in_dict, some_dict):
 #      Добавляем словарь в переменную В
 # возвращает переменую B
 
-def make_value_new_dict(name_in_dict, some_dict):
+def make_value_new_dict(name_in_dict, some_dict,fff):
       list_of_ingradient = some_dict[name_in_dict]
       new_list_of_ingradient = []
+      #indeks = 0
       for name_of_ingradient in  list_of_ingradient:
             aaa = name_of_ingradient ['measure']
-            bbb = int(name_of_ingradient ['quantity'])*persons
+            bbb = int(name_of_ingradient ['quantity']) * persons #* fff[indeks]
             ingradient_dict = {'measure': aaa , 'quantity': bbb  }
             new_list_of_ingradient.append(ingradient_dict)
+            #indeks += 1
+      #print(new_list_of_ingradient)
       return new_list_of_ingradient
 
 
@@ -124,25 +127,24 @@ def get_shop_list_by_dishes (whishes_list, book):
 # Проверка правильости блюда по переменной dishes_name_lis - цикл по списку ввода.
       total_list_ingredients = []
       total_list_megering = []
+      qvontat_dish = []
       for dish_name in whishes_list:
             if dish_name in dishes_name_list_for:
-                  # добавляем в АА переменную А
-                  # добавляем в BB переменную B
                   total_list_ingredients += (make_key_new_dict(dish_name, book))
-                  total_list_megering += (make_value_new_dict(dish_name,book))
+                  for qvontat in total_list_ingredients:
+                       qvontat_dish.append(total_list_ingredients.count(qvontat))
+                  total_list_megering += (make_value_new_dict(dish_name, book, qvontat_dish))
             else:
                   print (f'Блюда {dish_name} нет в кухонной книге')
 
-      new_dict_of_dish_for_persons = {(key_new_dict): (value_new_dict) for key_new_dict in total_list_ingredients
-                                            for value_new_dict in  total_list_megering }
-
+      new_dict_of_dish_for_persons = dict(zip(total_list_ingredients,total_list_megering))
       return  new_dict_of_dish_for_persons
 
+cook_book = dict(zip(dishes_name_list_for,new_list_of_list))
 
 
 
-
-whishes_list = ['Омлет', 'Утка по-пекински']
+whishes_list = ['Омлет', 'Фахитос']
 persons = 3
 print (get_shop_list_by_dishes (whishes_list, cook_book))
 
