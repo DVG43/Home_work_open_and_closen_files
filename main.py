@@ -17,15 +17,7 @@ import os
 #     {'ingredient_name': 'Сыр гауда', 'quantity': 100, 'measure': 'г'},
 #     ]
 #   }
-# my_file = open("BabyFile.txt", "w+")
-# my_file.write("Привет, файл!")
-# my_file.close()
 
-# my_file = open ("coock_book.txt","w+")
-# my_file.write("Все ОК")
-# my_file.close()
-
-# достаем из файла названия блюд и формируем список
 def get_data_dishes(file_neme):
       dishes_list = []
       with open(file_neme,encoding='UTF-8') as file:
@@ -49,7 +41,6 @@ def get_data_ingrediens(file_neme):
                         ingradients = file.readline().strip()
                         list_ingr.append(ingradients)
                   file.readline()
-      #print(ingredients_list)
       return ingredients_list
 
 def make_dict_from_str(str_name):
@@ -63,24 +54,13 @@ def make_list_of_dict(list_list):
             new_element_list = []
             for element_str in element_list:
                  new_element_list.append(make_dict_from_str(element_str))
-                 #new_element_list.append('\n')
             new_list_of_dict.append(new_element_list)
-            #new_list_of_dict.append('\n')
-      #print(new_list_of_dict)
       return new_list_of_dict
 
-# print(new_list_of_dict)
-#print()
+
 list_of_list = get_data_ingrediens("starting_file.txt")
-#print(list_of_list)
 new_list_of_list = make_list_of_dict(list_of_list)
-#print(new_list_of_list)
-
-
 dishes_name_list_for = get_data_dishes("starting_file.txt")
-# Генератор словаря из двух списков
-#cook_book = {(key_dishes_name_lis): (value_list_of_list) for key_dishes_name_lis in dishes_name_list_for
-             #for value_list_of_list in new_list_of_list}
 cook_book = dict(zip(dishes_name_list_for,new_list_of_list))
 
 print(cook_book)
@@ -108,17 +88,14 @@ def make_key_new_dict(name_in_dict, some_dict):
 #      Добавляем словарь в переменную В
 # возвращает переменую B
 
-def make_value_new_dict(name_in_dict, some_dict,fff):
+def make_value_new_dict(name_in_dict, some_dict):
       list_of_ingradient = some_dict[name_in_dict]
       new_list_of_ingradient = []
-      #indeks = 0
       for name_of_ingradient in  list_of_ingradient:
             aaa = name_of_ingradient ['measure']
-            bbb = int(name_of_ingradient ['quantity']) * persons #* fff[indeks]
+            bbb = int(name_of_ingradient ['quantity']) * persons
             ingradient_dict = {'measure': aaa , 'quantity': bbb  }
             new_list_of_ingradient.append(ingradient_dict)
-            #indeks += 1
-      #print(new_list_of_ingradient)
       return new_list_of_ingradient
 
 
@@ -131,24 +108,31 @@ def get_shop_list_by_dishes (whishes_list, book):
       for dish_name in whishes_list:
             if dish_name in dishes_name_list_for:
                   total_list_ingredients += (make_key_new_dict(dish_name, book))
-                  for qvontat in total_list_ingredients:
-                       qvontat_dish.append(total_list_ingredients.count(qvontat))
-                  total_list_megering += (make_value_new_dict(dish_name, book, qvontat_dish))
+                  total_list_megering += (make_value_new_dict(dish_name, book,))
             else:
                   print (f'Блюда {dish_name} нет в кухонной книге')
 
-      new_dict_of_dish_for_persons = dict(zip(total_list_ingredients,total_list_megering))
-      return  new_dict_of_dish_for_persons
+      for qvontat in total_list_ingredients:
+            qvontat_dish.append(total_list_ingredients.count(qvontat))
 
-cook_book = dict(zip(dishes_name_list_for,new_list_of_list))
+      total_list_megering_new = []
+      indeks = 0
+      for member in total_list_megering:
+            aaaa = member['measure']
+            #print(qvontat_dish[indeks])
+            bbbb = int(member['quantity']) * qvontat_dish[indeks]
+            cccc = {'measure': aaaa, 'quantity': bbbb}
+            total_list_megering_new.append(cccc)
+            indeks += 1
 
-
+      new_dict_of_dish_for_persons = dict(zip(total_list_ingredients, total_list_megering_new))
+      return new_dict_of_dish_for_persons
 
 whishes_list = ['Омлет', 'Фахитос']
 persons = 3
 print (get_shop_list_by_dishes (whishes_list, cook_book))
 
-#услови  и то что вывести
+#условиe  и то что вывести
 #  get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2)
 # {
 #   'Картофель': {'measure': 'кг', 'quantity': 2},
