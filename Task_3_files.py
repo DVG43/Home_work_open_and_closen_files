@@ -33,7 +33,7 @@ while step < len(file_list):
      step +=1
 for some_file in new_file_list:
      with open(some_file) as f:
-         new_data = f.readlines()
+         new_data = f.read()
          new_data_from_files.append(new_data)
 new_data_from_files.sort(key=len)
 #sorted(new_data_from_files, key=len)
